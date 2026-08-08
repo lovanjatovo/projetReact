@@ -21,9 +21,11 @@ useEffect(() => {
       });
   },[]);
 
+  
   const filteredPokemons = pokemons.filter((pokemon) => {
     return pokemon.name.toLowerCase().includes(searchTerm.toLowerCase()); 
   });
+
 
   return(
     <>
