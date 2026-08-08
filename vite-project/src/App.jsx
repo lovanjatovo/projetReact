@@ -14,7 +14,7 @@ useEffect(() => {
     })
 },[]);
 const filteredPokemons = pokemons.filter((pokemon) => {
-  pokemon.name.toLowerCase().includes(searchTerm.toLowerCase());
+  return pokemon.name.toLowerCase().includes(searchTerm.toLowerCase());
 });
 
   return(
@@ -25,7 +25,7 @@ const filteredPokemons = pokemons.filter((pokemon) => {
       type="text"
       placeholder="Rechercher un Pokémon"
       value={searchTerm}
-      onChange={(state) => setSearchTerm(state.target.value)}
+      onChange={(e) => setSearchTerm(e.target.value)}
       className="pokeFinder"
       />
     </div>
@@ -43,6 +43,21 @@ const filteredPokemons = pokemons.filter((pokemon) => {
     </div>
     </>
   );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   /* return (
     <>
       <h1>Hello !</h1>
