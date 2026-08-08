@@ -8,10 +8,17 @@ const [pokemons , setPokemons] = useState([]);
 const [searchTerm, setSearchTerm] = useState("");
 useEffect(() => {
   fetch("https://pokeapi.co/api/v2/pokemon?limit=100")
-    .then(response => response.json())
+    .then(response => response.json()) //pour que response soit exploitable
+     // texte brute en JSON 
+     // // le .json() retourne aussi un promise donc on peut 
+     // faire un autre .then pour récupérer les données
     .then(data => {
-      setPokemons(data.results);
+      setPokemons(data.results); // await fetch() pour attendre la réponse de l'API avant de continuer  // retourne tjrs un promise
     })
+    .catch((err) => 
+      {console.log("Error : ", err);
+        return []; //toujours s'attendre à un retour de tableau meme si il est vide pour eviter les erreurs de type "undefined" dans le code
+      });
   },[]);
 
   const filteredPokemons = pokemons.filter((pokemon) => {
@@ -22,6 +29,7 @@ useEffect(() => {
     <>
     <div className="appContainer">
     <h1> Pokedex </h1>
+    <p>All 100 first pokemons</p>
     <input
       type="text"
       placeholder="Rechercher un Pokémon"
