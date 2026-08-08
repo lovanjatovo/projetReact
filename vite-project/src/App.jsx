@@ -1,43 +1,85 @@
-import { useState } from "react"; // le parametre de usestate est la valeur initiale de l'état (toutefois 0)
+import { useState, useEffect } from "react"; // le parametre de usestate est la valeur initiale de l'état (toutefois 0)
 import "./App.css"; {/* useState est toujours utilise pour manipuler le DOM mais pas "let" ou "var" */}
 // App est un composant React, il doit commencer par une majuscule
+import PokemonCard from "./PokemonCard";
 
-function App() {
-  return (
+export default function App() {
+const [pokemons , setPokemons] = useState([]);
+const [searchTerm, setSearchTerm] = useState("");
+useEffect(() => {
+  fetch("https://pokeapi.co/api/v2/pokemon?limit=100")
+    .then(response => response.json())
+    .then(data => {
+      setPokemons(data.results);
+    })
+},[]);
+const filteredPokemons = pokemons.filter((pokemon) => {
+  pokemon.name.toLowerCase().includes(searchTerm.toLowerCase());
+});
+
+  return(
+    <>
+    <div className="appContainer">
+    <h1> Pokedex </h1>
+    <input
+      type="text"
+      placeholder="Rechercher un Pokémon"
+      value={searchTerm}
+      onChange={(state) => setSearchTerm(state.target.value)}
+      className="pokeFinder"
+      />
+    </div>
+    <div className="pokemonContainer">
+      {filteredPokemons.map((pokemon) => {
+        const pokemonId = pokemon.url.split("/")[6];
+      return(
+        <PokemonCard
+          key={pokemonId}
+          id={pokemonId}
+          name={pokemon.name}
+          />
+      );
+      })}
+    </div>
+    </>
+  );
+  /* return (
     <>
       <h1>Hello !</h1>
       <div>name</div>
       <UserInfo name="Alice" age={25} />
       <Count />{" "}
       {/*Count n'a pas de contenu c'est pour cela qu'on utilise 
-      cette syntaxe (voir aussi : <Count > <Count />)*/}
+      cette syntaxe (voir aussi : <Count > <Count />)}
     </>
-  );
+  ); */ 
 }
 
 // "<></>"" est appelé fragment, il permet de retourner
 // plusieurs elements sans avoir besoin d'un div parent
 
-function Count() {
+/* function Count() {
   const [count, setCount] = useState(0);
-  {/* useState est un hook qui permet de gérer l'état d'un composant */}
+  {/* useState est un hook qui permet de gérer l'état d'un composant }
   return (
     <>
       <p> Increment : {count}</p>
       {/* setCount est la fonction utilisée pour
      mettre à jour l'état de useState (dans ce cas, count est la valeur 
-     de l'état (count === useState(0) === 0) et setCount est la fonction pour la modifier)*/}
+     de l'état (count === useState(0) === 0) et setCount est la fonction pour la modifier)}
       <button onClick={() => setCount(count + 1)}>+</button>
-      {/* onClick s'attend toujours à une fonction mais non une valeur */}
+      {/* onClick s'attend toujours à une fonction mais non une valeur }
       <button onClick={() => setCount(count - 1)}>-</button>
-      {/* useState pour gérer l'état */}
+      {/* useState pour gérer l'état }
       <br/>
     </>
   );
 }
+*/
 
 // comment se partagent les informations entre composants ?
 
+/* 
 function UserInfo(props) {
   const users = [
     { name: "Alice", age: 25 },
@@ -50,7 +92,7 @@ function UserInfo(props) {
       <h2>Liste des utilisateurs :</h2>
       {users.map((user, index) =>
         <user name={user.name} age={user.age} /> && user.age === props.age ? (
-          <div key={index}> {/* key pour permettre a un tableau d'etre mis a jour (dans notre cas les id dans le tableau) */}
+          <div key={index}> {/* key pour permettre a un tableau d'etre mis a jour (dans notre cas les id dans le tableau) } 
             <p>Nom : {user.name}</p>
             <p>Age : {user.age}</p>
           </div>
@@ -61,5 +103,4 @@ function UserInfo(props) {
     </>
   );
 }
-
-export default App;
+*/
