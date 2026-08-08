@@ -189,14 +189,14 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: 16px;
-    padding: 18px;
+    padding: 8px;
 }
 
 .pokemonContainer .pokemonCard {
     width: 200px;
-    height: 300px;
-    border: 1px solid var(--border);
-    border-radius: 12px;
+    height: 230px;
+    border: 2.5px solid rgba(228, 228, 228, 0.589);
+    border-radius: 8px;
     background-color: var(--card-bg);
     box-shadow: var(--shadow);
     transition: transform 0.3s, box-shadow 0.3s;
@@ -205,4 +205,39 @@
 .pokemonCard:hover {
     transform: translateY(-5px);
     box-shadow: var(--shadow-hover);
+    
+}
+
+.PokemonCard h1{
+  font-size: 20px;
+  font-style: italic;
+  color: var(--text-h);
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  margin: 8px 0;
+  padding: 8px;
+}
+
+.PokemonCard img{
+  width: 3vh;
+  height: 3vh;
+  object-fit: cover;
+  border-radius: 50%;
+  margin: 8px 0;
+}
+
+/* Style de la barre de recherche avec sa classe 🎨 */
+.pokeFinder {
+  padding: 10px 16px;
+  font-size: 16px;
+  border: 2px solid #cccccca1;
+  border-radius: 120px;
+  width: 200px;
+  margin-bottom: 40px;
+  outline: none;
+}
+
+/* Effet lorsqu'on clique dans le champ 💡 */
+.pokeFinder:focus {
+  border-color: #ffcb05; /* Couleur jaune Pokémon */
 }

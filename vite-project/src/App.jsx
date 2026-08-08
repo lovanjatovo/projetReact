@@ -12,10 +12,11 @@ useEffect(() => {
     .then(data => {
       setPokemons(data.results);
     })
-},[]);
-const filteredPokemons = pokemons.filter((pokemon) => {
-  return pokemon.name.toLowerCase().includes(searchTerm.toLowerCase());
-});
+  },[]);
+
+  const filteredPokemons = pokemons.filter((pokemon) => {
+    return pokemon.name.toLowerCase().includes(searchTerm.toLowerCase()); 
+  });
 
   return(
     <>
@@ -43,13 +44,7 @@ const filteredPokemons = pokemons.filter((pokemon) => {
     </div>
     </>
   );
-
-
-
-
-
-
-
+}
 
 
 
@@ -68,7 +63,6 @@ const filteredPokemons = pokemons.filter((pokemon) => {
       cette syntaxe (voir aussi : <Count > <Count />)}
     </>
   ); */ 
-}
 
 // "<></>"" est appelé fragment, il permet de retourner
 // plusieurs elements sans avoir besoin d'un div parent

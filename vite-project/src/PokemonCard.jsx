@@ -5,8 +5,8 @@ function PokemonCard({ id , name}){
         <>
         <div className="pokemonCard">
             <img src={imgUrl} alt={name} />
-            <h1> Id : {id}</h1>
-            <h2> Name : {name}</h2>
+            <h1> id : {id}</h1>
+            <h2> name : {name}</h2>
             </div>
             
         </>
