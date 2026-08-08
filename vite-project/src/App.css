@@ -200,12 +200,29 @@
     background-color: var(--card-bg);
     box-shadow: var(--shadow);
     transition: transform 0.3s, box-shadow 0.3s;
+    padding: 10px;
+    font-weight: bold;
+}
+
+.pokemonCard h1{
+  font-size: 28px;
+  font-style: italic;
+  color: var(--text-h);
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  margin: 8px 0;
+  padding: 8px;
+}
+
+.pokemonCard h2{
+  font-size: 16px;
+  color: var(--text-h);
+  font-family: 'Arial', sans-serif;
 }
 
 .pokemonCard:hover {
     transform: translateY(-5px);
     box-shadow: var(--shadow-hover);
-    
 }
 
 .PokemonCard h1{
@@ -213,7 +230,6 @@
   font-style: italic;
   color: var(--text-h);
   font-family: 'Courier New', Courier, monospace;
-  font-weight: bold;
   margin: 8px 0;
   padding: 8px;
 }
