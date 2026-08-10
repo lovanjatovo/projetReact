@@ -2,8 +2,10 @@ import { useState, useEffect } from "react"; // le parametre de usestate est la 
 import "./App.css"; {/* useState est toujours utilise pour manipuler le DOM mais pas "let" ou "var" */}
 // App est un composant React, il doit commencer par une majuscule
 import PokemonCard from "./PokemonCard";
+import Pokemon2 from "./Pokemon2";
 
 export default function App() {
+  /*
 const [pokemons , setPokemons] = useState([]);
 const [searchTerm, setSearchTerm] = useState("");
 useEffect(() => {
@@ -54,7 +56,29 @@ useEffect(() => {
     </div>
     </>
   );
-}
+*/
+const [pokemon , setPokemon] = useState(Pokemon2);
+  function ShowThe50NextPokemons(){
+    useEffect(() => {
+      fetch("https://pokeapi.co/api/v2/pokemon?limit=50&offset=100")
+      .then(response => response.json())
+      .then(data => {
+        setPokemon(data.result())
+      })
+      .catch(err => console.log(err));
+    })
+
+    return(
+      <>
+      <div className="pokemon">
+        {setPokemon.map((pokemon) => {
+
+        })}
+      </div>
+      </>
+    );
+    }
+  }
 
 
 
