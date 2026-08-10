@@ -1,4 +1,42 @@
 const express = require('express');
+const app = express();
+const PORT = 3000;
+
+app.use(express.json());
+// Une route de test simple
+/* app.get('/', (req, res) => {
+  res.send('Bienvenue sur le serveur Express ! , vous pouvez maintenant ajouter vos routes et fonctionnalités. Vous pouvez également connecter votre serveur à une base de données PostgreSQL en utilisant le module pg.');
+});
+*/
+let users =[
+    {id: 1, name: "Lova", email: "lova@example.com"},
+    {id: 2, name: "Sarobidy", email: "sarobidy@example.com"}
+]
+
+// Démarrage du serveur
+app.listen(PORT, () => {
+  console.log(`Serveur démarré sur http://localhost:${PORT}`);
+});
+
+//test avec le verbe GET pour récupérer les utilisateurs
+app.get('/api/users',(req, res) =>{
+    res.json(users);
+})
+
+//test avec le verbe POST pour ajouter un utilisateur
+app.post('/api/users', (req,res) => {
+    const newUser = {
+        id: users.length + 1,
+        name: req.body.name,
+        email: req.body.email
+    };
+    users.push(newUser);
+    res.status(201).json(newUser);
+});
+
+
+/*
+const express = require('express');
 const app = express(); // app est une constante qui va se faire attribuer les fonctions de express 
 
 const PORT = process.env.PORT || 3000;
@@ -66,3 +104,5 @@ app.use((req, res) => {
 app.listen(PORT, () => {
   console.log(`Serveur démarré sur http://localhost:${PORT}`);
 });
+
+*/
