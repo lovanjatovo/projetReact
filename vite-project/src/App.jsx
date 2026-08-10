@@ -1,9 +1,34 @@
 import { useState, useEffect } from "react"; // le parametre de usestate est la valeur initiale de l'état (toutefois 0)
-import "./App.css"; {/* useState est toujours utilise pour manipuler le DOM mais pas "let" ou "var" */}
+import "./App.css";
+{
+  /* useState est toujours utilise pour manipuler le DOM mais pas "let" ou "var" */
+}
 // App est un composant React, il doit commencer par une majuscule
 // import PokemonCard from "./PokemonCard";
 import Pokemon2 from "./Pokemon2";
 
+function ShowThe50NextPokemons() {
+  const [pokemon, setPokemon] = useState([]);
+  useEffect(() => {
+    fetch("https://pokeapi.co/api/v2/pokemon?limit=50&offset=100")
+      .then((response) => response.json())
+      .then((data) => {
+        setPokemon(data.results);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  return (
+    <>
+      <div className="pokemon">
+        {pokemon.map((poke) => {
+          poke.id = poke.url.split("/")[6];
+          return <Pokemon2 key={poke.id} id={poke.id} name={poke.name} />;
+        })}
+      </div>
+    </>
+  );
+}
 export default function App() {
   /*
 const [pokemons , setPokemons] = useState([]);
@@ -57,47 +82,10 @@ useEffect(() => {
     </>
   );
 */
-const [pokemon , setPokemon] = useState(Pokemon2);
+  return <ShowThe50NextPokemons />;
+}
 
-  function ShowThe50NextPokemons(){
-    useEffect(() => {
-      fetch("https://pokeapi.co/api/v2/pokemon?limit=50&offset=100")
-      .then(response => response.json())
-      .then(data => {
-        setPokemon(data.results)
-      })
-      .catch(err => console.log(err));
-    },[]);
-
-    return(
-      <>
-      <div className="pokemon">
-        {pokemon.map((pokemon) => {
-          pokemon.value = pokemon.url.split("/")[6];
-          return(
-            <Pokemon2
-              key={pokemon.value}
-              id={pokemon.value}
-              name={pokemon.name}
-            />
-          );
-        })}
-      </div>
-      </>
-    );
-    }
-
-    <ShowThe50NextPokemons />
-  }
-
-
-
-
-
-
-
-
-  /* return (
+/* return (
     <>
       <h1>Hello !</h1>
       <div>name</div>
@@ -106,7 +94,7 @@ const [pokemon , setPokemon] = useState(Pokemon2);
       {/*Count n'a pas de contenu c'est pour cela qu'on utilise 
       cette syntaxe (voir aussi : <Count > <Count />)}
     </>
-  ); */ 
+  ); */
 
 // "<></>"" est appelé fragment, il permet de retourner
 // plusieurs elements sans avoir besoin d'un div parent

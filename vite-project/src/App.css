@@ -257,3 +257,39 @@
 .pokeFinder:focus {
   border-color: #ffcb05; /* Couleur jaune Pokémon */
 }
+
+.pokemon{
+    width: 200px;
+    height: 230px;
+    border: 2.5px solid rgba(228, 228, 228, 0.589);
+    border-radius: 8px;
+    background-color: var(--card-bg);
+    box-shadow: var(--shadow);
+    transition: transform 0.3s, box-shadow 0.3s;
+    padding: 10px;
+    font-weight: bold;
+}
+.pokemon h1{
+  font-size: 28px;
+  font-style: italic;
+  color: var(--text-h);
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  margin: 8px 0;
+  padding: 8px;
+}
+
+.pokemon h2{
+  font-size: 16px;
+  color: var(--text-h);
+  font-family: 'Arial', sans-serif;
+}
+
+.container{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    padding: 8px;
+}
