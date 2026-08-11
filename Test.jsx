@@ -58,7 +58,13 @@ function User(){
         <>
         <div>
             <h1>{user.name}</h1>
-            <img src={user.imageUrl} alt={"photo of : " + user.name} />
+            <img src={user.imageUrl} alt={"photo of : " + user.name} 
+            style= {{
+                width: user.imageSize,
+                heigth: user.imageSize,
+                borderRadius: user.imageSize + 200  
+            }}
+            />
         </div>
         </>
     );
