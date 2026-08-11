@@ -8,7 +8,7 @@ app.use(express.json());
   res.send('Bienvenue sur le serveur Express ! , vous pouvez maintenant ajouter vos routes et fonctionnalités. Vous pouvez également connecter votre serveur à une base de données PostgreSQL en utilisant le module pg.');
 });
 */
-let users =[
+let students =[
     {id: 1, name: "Lova", email: "lova@example.com"},
     {id: 2, name: "Sarobidy", email: "sarobidy@example.com"}
 ]
@@ -19,22 +19,36 @@ app.listen(PORT, () => {
 });
 
 //test avec le verbe GET pour récupérer les utilisateurs
-app.get('/api/users',(req, res) =>{
-    res.json(users);
+app.get('/api/students',(req, res) =>{
+    res.json(students);
 })
 
 //test avec le verbe POST pour ajouter un utilisateur
-app.post('/api/users', (req,res) => {
-    const newUser = {
-        id: users.length + 1,
+app.post('/api/students', (req,res) => {
+    const newStudent = {
+        id: students.length + 1,
         name: req.body.name,
         email: req.body.email
     };
-    users.push(newUser);
-    res.status(201).json(newUser);
+    students.push(newStudent);
+    res.status(201).json(newStudent);
 });
 
+//test avec le verbe put : changement total dans notre api
+app.put('/api/students/:id' , (req , res) => {
+    const studentChange = {
+        id: studentChange.req,
+        name: studentChange.req,
+        email: studentChange.req
+    };
+    students.push(studentChange);
+    res.status(200).json(studentChange);
+});
 
+//test avec le verbe patch
+app.patch('/api/students/:id') , (req , res) => {
+
+};
 /*
 const express = require('express');
 const app = express(); // app est une constante qui va se faire attribuer les fonctions de express 
