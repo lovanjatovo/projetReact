@@ -45,7 +45,7 @@ function ShowThe50Others(){
   return(
     <>
     <div className="main">
-      { pokemon.map((pok) = >{
+      { pokemon.map((pok) => {
         pok.id = pok.url.split("/")[6];
         return <Pokemon2 key={pok.id} id={pok.id} name={pok.name} />;
       })}
