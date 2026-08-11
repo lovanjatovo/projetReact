@@ -30,3 +30,36 @@ function App(){
     );
 }
 
+function MyButton(){
+    return(
+        <>
+        <button> I'm a button </button>
+        </>
+    );
+}
+
+function Authentification(){
+    return(
+        <>
+        <h1>Authentifiez vous</h1>
+        <MyButton />
+        </>
+    );
+}
+
+const user = {
+    name: heidi,
+    imageUrl: "https://image/example.com",
+    imageSize: 20
+}
+
+function User(){
+    return(
+        <>
+        <div>
+            <h1>{user.name}</h1>
+            <img src={user.imageUrl} alt={"photo of : " + user.name} />
+        </div>
+        </>
+    );
+}
