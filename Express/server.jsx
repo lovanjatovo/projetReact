@@ -64,7 +64,7 @@ app.patch(('/api/students/:id') , (req , res) => {
     }
 });
 
-
+//syntaxe de delete (verbe http) dans notre pre-API
 app.delete(('/api/students/:id') , (req , res) => {
    const idcible = req.params.id;
    if(idcible === res.params.id){

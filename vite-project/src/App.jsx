@@ -31,21 +31,21 @@ function ShowThe50NextPokemons() {
 }
 
 function ShowThe50Others(){
-  const [pokemon , setPokemon] = useState([]);
+  const [pokem , setPokem] = useState([]);
   useEffect (() => {
     fetch("https://pokeapi.co/api/v2/pokemon?limit=50&offset=150")
     .then(response => response.json())
     .then(data => {
-      setPokemon(data.results)
+      setPokem(data.results)
     })
     .catch(err => console.log(err)
     )
-  });
+  },[]);
 
   return(
     <>
     <div className="main">
-      { pokemon.map((pok) => {
+      { pokem.map((pok) => {
         pok.id = pok.url.split("/")[6];
         return <Pokemon2 key={pok.id} id={pok.id} name={pok.name} />;
       })}
@@ -53,6 +53,7 @@ function ShowThe50Others(){
     </>
   );
 }
+
 export default function App() {
   /*
 const [pokemons , setPokemons] = useState([]);
@@ -106,8 +107,12 @@ useEffect(() => {
     </>
   );
 */
-  return <ShowThe50NextPokemons />;
-  return <ShowThe50Othrs />
+  return (
+    <>
+      <ShowThe50NextPokemons />
+      <ShowThe50Others />
+    </>
+  );
 }
 
 /* return (
