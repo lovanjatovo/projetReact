@@ -1,18 +1,14 @@
-const express = require('express');
+import express from 'express';
 const PORT = process.env.PORT || 3000;
 const app = express();
-const cors = require('cors');
+import cors from 'cors';
+import router from './routes/student.js';
 
-app.use(cors());
-module.exports = router;
+app.use('/students' , router);
+app.use(cors.json());
 app.use(express.json());
-// Une route de test simple
-/* app.get('/', (req, res) => {
-  res.send('Bienvenue sur le serveur Express ! , vous pouvez maintenant ajouter vos routes et fonctionnalités. Vous pouvez également connecter votre serveur à une base de données PostgreSQL en utilisant le module pg.');
-});
-*/
 
-// Démarrage du serveur avec listen et PORT comme parametre
+// Démarrage du serveur avec listen et PORT comme parametre du port a lancer 
 app.listen(PORT, () => {
   console.log(`Serveur allume sur http://localhost:${PORT}`);
 });
