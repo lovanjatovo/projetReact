@@ -9,14 +9,6 @@ app.use(express.json());
 });
 */
 
-//base de donnees periodique :
-let students =[
-    {id: 1, name: "Lova", email: "lova@example.com"},
-    {id: 2, name: "Sarobidy", email: "sarobidy@example.com"}
-]
-
-students: Array;
-
 // Démarrage du serveur avec listen et PORT comme parametre
 app.listen(PORT, () => {
   console.log(`Serveur allume sur http://localhost:${PORT}`);
