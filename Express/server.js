@@ -3,6 +3,7 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 import cors from 'cors';
 import router from './routes/student.js';
+import { postNewStudent } from './controllers/student.js';
 
 app.use('/students' , router);
 app.use(express.json());
@@ -17,42 +18,13 @@ app.get('/students',(req , res) =>{
     res.json();
 })
 
-app.post('/students', (req , res) => {
-    const newStudentData = req.body;
-    res.json();
-});
+app.post('/students', postNewStudent);
 
 //test avec le verbe put : changement total dans notre api
-app.put('students/:id' , (req , res) => {
-    const studentChange = {
-        id: req.id,
-        name: req.name,
-        email: req.email
-    };
-    students.push(studentChange);
-    res.status(200).json(studentChange);
-});
+app.put('students/:id' ,);
 
 //test avec le verbe patch
-app.patch(('/students/:id') , (req , res) => {
-    const newStudent = {
-        id: req.id,
-        name: req.name,
-        email: req.email
-    };
-    students.push(newStudent);
-    for(i = 0 ; i < students.length ; i++){
-        if(i.name || i.id || i.email === newStudent.name || newStudent.id || newStudent.email){
-            res.status(200).json(newStudent);
-        }
-    }
-});
+app.patch(('/students/:id') ,);
 
 
-app.delete(('/students/:id') , (req , res) => {
-   const idcible = req.params.id;
-   if(idcible === res.params.id){
-    res.params.id.delete();
-   }
-   res.status(204).json(idcible);
-});
+app.delete(('/students/:id') ,);
