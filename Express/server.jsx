@@ -19,7 +19,7 @@ students: Array;
 
 // Démarrage du serveur avec listen et PORT comme parametre
 app.listen(PORT, () => {
-  console.log(`Serveur démarré sur http://localhost:${PORT}`);
+  console.log(`Serveur allume sur http://localhost:${PORT}`);
 });
 
 //test avec le verbe GET pour récupérer les utilisateurs
@@ -41,9 +41,9 @@ app.post('/api/students', (req,res) => {
 //test avec le verbe put : changement total dans notre api
 app.put('/api/students/:id' , (req , res) => {
     const studentChange = {
-        id: studentChange.req,
-        name: studentChange.req,
-        email: studentChange.req
+        id: req.id,
+        name: req.name,
+        email: req.email
     };
     students.push(studentChange);
     res.status(200).json(studentChange);
@@ -52,9 +52,9 @@ app.put('/api/students/:id' , (req , res) => {
 //test avec le verbe patch
 app.patch(('/api/students/:id') , (req , res) => {
     const newStudent = {
-        id: newStudent.req,
-        name: newStudent.req,
-        email: newStudent.req
+        id: req.id,
+        name: req.name,
+        email: req.email
     };
     students.push(newStudent);
     for(i = 0 ; i < students.length ; i++){
