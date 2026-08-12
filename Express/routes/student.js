@@ -1,4 +1,5 @@
 import { getListOfStudents } from '../controllers/student.js';
+import { postNewStudent } from '../controllers/student.js';
 import express from 'express';
 import statuses from 'statuses';
 const message = statuses;
@@ -11,12 +12,9 @@ router.get("/students/:id" , (req , res) =>{
     res.json({message: "About a student who has the id :" + req.body.id });
 });
 
-router.post("/students" , (req , res) => {
-    //...
-    res.json({message: "Creation of a new student in the API !"});
-});
+router.post("/students" , postNewStudent);
 
-router.put("/students" , (req , res) => {
+router.put("/students/:id" , (req , res) => {
     //...
     res.json({message: "Changing on a student !"});
 });

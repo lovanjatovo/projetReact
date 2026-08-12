@@ -4,7 +4,7 @@ const app = express();
 import cors from 'cors';
 import router from './routes/student.js';
 
-app.use('/' , router);
+app.use('/students' , router);
 app.use(express.json());
 app.use(cors());
 
@@ -13,23 +13,17 @@ app.listen(PORT, () => {
   console.log(`Serveur allume sur http://localhost:${PORT}`);
 });
 
-app.get('/api/students',(req, res) =>{
-    res.json(students);
+app.get('/students',(req , res) =>{
+    res.json();
 })
 
-
-app.post('/api/students', (req,res) => {
-    const newStudent = {
-        id: students.length + 1,
-        name: req.body.name,
-        email: req.body.email
-    };
-    students.push(newStudent);
-    res.status(201).json(newStudent);
+app.post('/students', (req , res) => {
+    const newStudentData = req.body;
+    res.json();
 });
 
 //test avec le verbe put : changement total dans notre api
-app.put('/api/students/:id' , (req , res) => {
+app.put('students/:id' , (req , res) => {
     const studentChange = {
         id: req.id,
         name: req.name,
@@ -40,7 +34,7 @@ app.put('/api/students/:id' , (req , res) => {
 });
 
 //test avec le verbe patch
-app.patch(('/api/students/:id') , (req , res) => {
+app.patch(('/students/:id') , (req , res) => {
     const newStudent = {
         id: req.id,
         name: req.name,
@@ -55,7 +49,7 @@ app.patch(('/api/students/:id') , (req , res) => {
 });
 
 
-app.delete(('/api/students/:id') , (req , res) => {
+app.delete(('/students/:id') , (req , res) => {
    const idcible = req.params.id;
    if(idcible === res.params.id){
     res.params.id.delete();
