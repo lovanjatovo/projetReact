@@ -1,5 +1,7 @@
 import { getListOfStudents } from '../controllers/student.js';
 import { postNewStudent } from '../controllers/student.js';
+import { putStudent } from '../controllers/student.js';
+import { patchStudent } from '../controllers/student.js';
 import { deleteStudent } from '../controllers/student.js';
 import express from 'express';
 import statuses from 'statuses';
@@ -15,15 +17,9 @@ router.get("/students/:id" , (req , res) =>{
 
 router.post("/students" , postNewStudent);
 
-router.put("/students/:id" , (req , res) => {
-    //...
-    res.json({message: "Changing on a student !"});
-});
+router.put("/:id" , putStudent);
 
-router.patch("/students/:id" , (req , res) =>{
-    //...
-    res.json({message: "Partial modification of a student !"})
-});
+router.patch("/:id" , patchStudent);
 
 router.delete("/:id" , deleteStudent );
 

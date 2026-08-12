@@ -1,6 +1,7 @@
 import { json } from 'body-parser';
 import fs from 'fs';
-import { message } from 'statuses';
+import statuses from 'statuses';
+const message = statuses;
 export const getListOfStudents = (req, res) => {
   const data = fs.readFileSync('./datas/students.json');
   const allStudents = JSON.parse(data); // cette parametre permet de changer le texte brut du json en objet javascript
@@ -13,7 +14,7 @@ export const postNewStudent = (req, res) => {
 
     if(!req.body.name || req.body.firstName){
         return res.status(400).json({
-            message: "Erreur: parametre manquante !"
+            message: "Error: missing parameter in the request's body !"
         });
     }
 
@@ -45,5 +46,50 @@ export const deleteStudent = (req , res) => {
     fs.writeFileSync("./datas/students.json",JSON.stringify(newList),null,2);
     res.status(204).json({
         message: "No content"
+    })
+}
+
+export const putStudent = (req , res) => {
+    const idStudent = req.params.id;
+    const data = fs.readFileSync('./datas/students.json');
+    const allStudents = JSON.parse(data);
+
+    if(!req.body.name || !req.body.firstName){
+        return res.status(400).json({
+            message: "missing parameter inside the request's body !"
+        })
+    }
+
+    const newList = allStudents.forEach(element => {
+        if( element.id == parseInt(idStudent)){
+            element.name = req.body.name;
+            element.firstName = req.body.firstName
+        }
+    });
+
+    fs.writeFileSync('./datas/students.json',JSON.stringify(allStudents),null,2);
+    res.status(200).json({
+        message: "student changed at all"
+    })
+}
+
+export const patchStudent = (req , res) => {
+    const idStudent = req.params.id;
+    const data = fs.readFileSync('./datas/students.json');
+    const allStudents = JSON.parse(data);
+
+    if (req.body.name !== undefined) {
+    element.name = req.body.name;
+}
+    const newList = allStudents.forEach(element => {
+        if( element.id == parseInt(idStudent)){
+            element.name = req.body.name;
+            element.firstName = req.body.firstName
+        }
+    });
+
+    fs.writeFileSync('./datas/students.json',JSON.stringify(allStudents),null,2);
+    res.status(200).json({
+        message: "student changed at all"
     })
 }

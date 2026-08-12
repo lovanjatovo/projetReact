@@ -4,6 +4,8 @@ const app = express();
 import cors from 'cors';
 import router from './routes/student.js';
 import { postNewStudent } from './controllers/student.js';
+import { putStudent } from './controllers/student.js';
+import { patchStudent } from './controllers/student.js';
 import { deleteStudent } from './controllers/student.js';
 
 app.use('/students' , router);
@@ -22,10 +24,10 @@ app.get('/students',(req , res) =>{
 app.post('/students', postNewStudent);
 
 //test avec le verbe put : changement total dans notre api
-app.put('students/:id' ,);
+app.put('/:id' , putStudent);
 
 //test avec le verbe patch
-app.patch(('/students/:id') ,);
+app.patch('/:id' , patchStudent);
 
 
-app.delete(('/:id') , deleteStudent);
+app.delete('/:id', deleteStudent);
