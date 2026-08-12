@@ -1,11 +1,10 @@
-const express = require('express');
-const { message } = require('statuses');
+import { getListOfStudents } from '../controllers/student.js';
+import express from 'express';
+import statuses from 'statuses';
+const message = statuses;
 const router = express.Router();
 
-router.get("/" , (req , res) =>{
-    //... 
-    res.json({message: "List of all students in the API !"});
-});
+router.get("/" , getListOfStudents);
 
 router.get("/students/:id" , (req , res) =>{
     //...
