@@ -78,18 +78,18 @@ export const patchStudent = (req , res) => {
     const data = fs.readFileSync('./datas/students.json');
     const allStudents = JSON.parse(data);
 
-    if (req.body.name !== undefined) {
-    element.name = req.body.name;
-}
-    const newList = allStudents.forEach(element => {
+    const newList = allStudents.forEach((element) => {
+        if (req.body.name !== undefined) {
+            element.name = req.body.name;
+        }
         if( element.id == parseInt(idStudent)){
             element.name = req.body.name;
             element.firstName = req.body.firstName
         }
-    });
+    })
 
     fs.writeFileSync('./datas/students.json',JSON.stringify(allStudents),null,2);
     res.status(200).json({
         message: "student changed at all"
-    })
+    });
 }
