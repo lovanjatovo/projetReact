@@ -4,6 +4,7 @@ const app = express();
 import cors from 'cors';
 import router from './routes/student.js';
 import { postNewStudent } from './controllers/student.js';
+import { deleteStudent } from './controllers/student.js';
 
 app.use('/students' , router);
 app.use(express.json());
@@ -27,4 +28,4 @@ app.put('students/:id' ,);
 app.patch(('/students/:id') ,);
 
 
-app.delete(('/students/:id') ,);
+app.delete(('/:id') , deleteStudent);

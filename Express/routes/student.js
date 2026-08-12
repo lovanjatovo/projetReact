@@ -1,5 +1,6 @@
 import { getListOfStudents } from '../controllers/student.js';
 import { postNewStudent } from '../controllers/student.js';
+import { deleteStudent } from '../controllers/student.js';
 import express from 'express';
 import statuses from 'statuses';
 const message = statuses;
@@ -24,9 +25,6 @@ router.patch("/students/:id" , (req , res) =>{
     res.json({message: "Partial modification of a student !"})
 });
 
-router.delete("/students/:id" , (req, res) =>{
-    //...
-    res.json({message: "Student deleted !"})
-});
+router.delete("/:id" , deleteStudent );
 
 export default router;
