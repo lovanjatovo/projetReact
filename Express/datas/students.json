@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1,
+        "name": "premierDeLaClasse",
+        "firstName": "Sarobidy"
+    },
+    {
+        "id": 2,
+        "name": "secondDeLaClasse",
+        "firstName": "Lovanjatovo"
+    },
+    {
+        "id": 3,
+        "name": "troisiemeDeLaClasse",
+        "firstName": "Allan"
+    },
+    {
+        "id": 4,
+        "name": "quatriemeDeLaClasse",
+        "firstName": "Handrianina"
+    }
+]
