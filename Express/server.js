@@ -21,6 +21,8 @@ app.get('/students',(req , res) =>{
     res.json();
 })
 
+app.get('./students/:id' , getStudent)
+
 app.post('/students', postNewStudent);
 
 //test avec le verbe put : changement total dans notre api

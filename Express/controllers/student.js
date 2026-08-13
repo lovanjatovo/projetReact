@@ -2,12 +2,15 @@ import { json } from 'body-parser';
 import fs from 'fs';
 import statuses from 'statuses';
 const message = statuses;
+
+// requete get pour lister les students
 export const getListOfStudents = (req, res) => {
   const data = fs.readFileSync('./datas/students.json');
   const allStudents = JSON.parse(data); // cette parametre permet de changer le texte brut du json en objet javascript
   res.status(200).json(allStudents); // renvoyer la reponse sous forme de json
 }
 
+// requete post pour creer un nouveau student
 export const postNewStudent = (req, res) => {
   const data1 = fs.readFileSync('./datas/students.json');
   const allStudents = JSON.parse(data1);
@@ -34,6 +37,8 @@ export const postNewStudent = (req, res) => {
   });
 }
 
+
+// requete delete poyr supprimer un student 
 export const deleteStudent = (req , res) => {
     const idStudent = req.params.id;
     const data1 = fs.readFileSync('./datas/students.json');
@@ -49,6 +54,8 @@ export const deleteStudent = (req , res) => {
     })
 }
 
+
+// requete put pout modifier un student completement
 export const putStudent = (req , res) => {
     const idStudent = req.params.id;
     const data = fs.readFileSync('./datas/students.json');
@@ -73,6 +80,8 @@ export const putStudent = (req , res) => {
     })
 }
 
+
+// requete patch pour modifier partiellemetn un student
 export const patchStudent = (req , res) => {
     const idStudent = req.params.id;
     const data = fs.readFileSync('./datas/students.json');
