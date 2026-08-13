@@ -114,6 +114,6 @@ export const patchStudent = (req , res) => {
 
     fs.writeFileSync('./datas/students.json',JSON.stringify(allStudents),null,2);
     res.status(200).json({
-        message: "student changed at all"
+        message: "student changed by your parameter "
     });
 }
