@@ -1,8 +1,0 @@
-[
-  { "id": 1, "name": "premier" },
-  { "id": 2, "name": "deuxieme", "firstName": "Lovanjatovo" },
-  { "id": 3, "name": "troisieme", "firstName": "Allan" },
-  { "id": 4, "name": "quatrieme", "firstName": "Handrianina" },
-  { "id": 5, "name": "cinquieme", "firstName": "Ryan" },
-  { "id": 6, "name": "sixieme", "firstName": "Santatriniaina" }
-]

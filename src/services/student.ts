@@ -5,7 +5,7 @@ const message = statuses;
 
 // requete get pour lister les students
 export const getListOfStudents = (req, res) => {
-  const data = fs.readFileSync('./datas/students.json');
+  const data = fs.readFileSync('./repository');
   const allStudents = JSON.parse(data); // cette parametre permet de changer le texte brut du json en objet javascript
   res.status(200).json(allStudents); // renvoyer la reponse sous forme de json
 }
@@ -13,7 +13,7 @@ export const getListOfStudents = (req, res) => {
 
 // requete get pour afficher un student specifique selon son id
 export const getStudent = (req , res) => {
-    const data = fs.readFileSync('./datas/students.json');
+    const data = fs.readFileSync('./repository');
     const ListOfStudent = JSON.parse(data);
     ListOfStudent.forEach((element) => {
         if(element.id == parseInt(req.params.id)){
@@ -27,7 +27,7 @@ export const getStudent = (req , res) => {
 
 // requete post pour creer un nouveau student
 export const postNewStudent = (req, res) => {
-  const data1 = fs.readFileSync('./datas/students.json');
+  const data1 = fs.readFileSync('./repository');
   const allStudents = JSON.parse(data1);
 
     if(!req.body.name || req.body.firstName){
@@ -56,14 +56,14 @@ export const postNewStudent = (req, res) => {
 // requete delete poyr supprimer un student 
 export const deleteStudent = (req , res) => {
     const idStudent = req.params.id;
-    const data1 = fs.readFileSync('./datas/students.json');
+    const data1 = fs.readFileSync('./repository');
     const allStudents = JSON.parse(data1);
 
     const newList = allStudents.filter((element) , () => {
         return element.id !== parseInt(idStudent);
     })
 
-    fs.writeFileSync("./datas/students.json",JSON.stringify(newList),null,2);
+    fs.writeFileSync("./repository",JSON.stringify(newList),null,2);
     res.status(204).json({
         message: "No content"
     })
@@ -73,7 +73,7 @@ export const deleteStudent = (req , res) => {
 // requete put pout modifier un student completement
 export const putStudent = (req , res) => {
     const idStudent = req.params.id;
-    const data = fs.readFileSync('./datas/students.json');
+    const data = fs.readFileSync('./repository');
     const allStudents = JSON.parse(data);
 
     if(!req.body.name || !req.body.firstName){
@@ -89,7 +89,7 @@ export const putStudent = (req , res) => {
         }
     });
 
-    fs.writeFileSync('./datas/students.json',JSON.stringify(allStudents),null,2);
+    fs.writeFileSync('./repository',JSON.stringify(allStudents),null,2);
     res.status(200).json({
         message: "student changed at all"
     })
@@ -99,7 +99,7 @@ export const putStudent = (req , res) => {
 // requete patch pour modifier partiellemetn un student
 export const patchStudent = (req , res) => {
     const idStudent = req.params.id;
-    const data = fs.readFileSync('./datas/students.json');
+    const data = fs.readFileSync('./repository');
     const allStudents = JSON.parse(data);
 
     const newList = allStudents.forEach((element) => {
@@ -112,7 +112,7 @@ export const patchStudent = (req , res) => {
         }
     })
 
-    fs.writeFileSync('./datas/students.json',JSON.stringify(allStudents),null,2);
+    fs.writeFileSync('./repository',JSON.stringify(allStudents),null,2);
     res.status(200).json({
         message: "student changed by your parameter "
     });
