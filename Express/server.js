@@ -7,6 +7,7 @@ import { postNewStudent } from './controllers/student.js';
 import { putStudent } from './controllers/student.js';
 import { patchStudent } from './controllers/student.js';
 import { deleteStudent } from './controllers/student.js';
+import { getStudent } from './controllers/student.js';
 
 app.use('/students' , router);
 app.use(express.json());
