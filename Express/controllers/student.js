@@ -10,6 +10,21 @@ export const getListOfStudents = (req, res) => {
   res.status(200).json(allStudents); // renvoyer la reponse sous forme de json
 }
 
+
+// requete get pour afficher un student specifique selon son id
+export const getStudent = (req , res) => {
+    const data = fs.readFileSync('./datas/students.json');
+    const ListOfStudent = JSON.parse(data);
+    ListOfStudent.forEach((element) => {
+        if(element.id == parseInt(req.params.id)){
+            return element;
+        }
+    });
+    res.status(200).json({
+        message: "Here is the student you looked for "
+    })
+}
+
 // requete post pour creer un nouveau student
 export const postNewStudent = (req, res) => {
   const data1 = fs.readFileSync('./datas/students.json');
