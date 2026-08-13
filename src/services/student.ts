@@ -1,3 +1,5 @@
+//ici se trouve les methodes et calculs pour renvoyer ensuite les reponses vers notre controlleur
+
 import { json } from 'body-parser';
 import fs from 'fs';
 import statuses from 'statuses';

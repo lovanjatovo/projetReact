@@ -1,3 +1,5 @@
+// ici se trouve notre recuperation de donnees dans notre base de donnees
+
 const { Pool } = require('pg');
 const pool = new Pool({
   user: 'hei',
