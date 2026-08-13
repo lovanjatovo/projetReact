@@ -1,6 +1,6 @@
 // ici se trouve notre traiteur de requete de CRUD
 
-import express from 'express';
+import { Request , Response } from "express";
 const PORT = process.env.PORT || 3000;
 const app = express();
 import cors from 'cors';
