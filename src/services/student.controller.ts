@@ -28,3 +28,28 @@ export const getStudent = async (req: Request, res: Response) => {
     res.status(500).json({ message: 'Error in fetching student', error });
   }
 };
+
+// Creer un etudiant
+export const postNewStudent = async (req: Request, res: Response) => {
+  const { firstName, lastName } = req.body;
+
+  if (!firstName || !lastName) {
+    return res.status(400).json({
+      message: "Error: missing 'firstName' or 'lastName' in your request body"
+    });
+  }
+
+  try {
+    const result = await pool.query(
+      'INSERT INTO student ("firstName", "lastName") VALUES ($1, $2)',
+      [firstName, lastName]
+    );
+
+    res.status(201).json({
+      message: 'Student created ',
+      student: result
+    });
+  } catch (error) {
+    res.status(500).json({ message: 'Error during creating student', error });
+  }
+};
