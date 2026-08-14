@@ -70,3 +70,33 @@ export const deleteStudent = async (req: Request, res: Response) => {
     res.status(500).json({ message: 'Error deleting student', error });
   }
 };
+
+// Mise a jour total d 'un etudianr
+export const putStudent = async (req: Request, res: Response) => {
+  const id = parseInt(req.params.id, 10);
+  const { firstName, lastName } = req.body;
+
+  if (!firstName || !lastName) {
+    return res.status(400).json({
+      message: "Error: missing 'firstName' or 'lastName' in ypur request body"
+    });
+  }
+
+  try {
+    const result = await pool.query(
+      'UPDATE student SET "firstName" = $1, "lastName" = $2 WHERE id = $3 ',
+      [firstName, lastName, id]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ message: 'Student not found' });
+    }
+
+    res.status(200).json({
+      message: 'Student updated !',
+      student: result.rows[0]
+    });
+  } catch (error) {
+    res.status(500).json({ message: 'Error during updating student', error });
+  }
+};
