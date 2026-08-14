@@ -1,132 +1,91 @@
 //ici se trouve les methodes et calculs pour renvoyer ensuite les reponses vers notre controlleur
-import { Request, Response } from 'express';
-import { pool } from '../repository/studentDB';
 
-// Recuperer tous les etudiants
+import { Request, Response } from 'express';
+import * as studentService from '../controllers/student.ts';
+
 export const getListOfStudents = async (req: Request, res: Response) => {
   try {
-    const result = await pool.query('SELECT * FROM student ORDER BY id ASC');
-    res.status(200).json(result);
+    const students = await studentService.getAllStudents();
+    res.status(200).json(students);
   } catch (error) {
-    res.status(500).json({ message: 'Error in fetching students', error });
+    res.status(500).json({ message: 'internal server error', error });
   }
 };
 
-// Recuperer un etudiant par ID
 export const getStudent = async (req: Request, res: Response) => {
-  const id = parseInt(req.params.id, 10);
-
   try {
-    const result = await pool.query('SELECT * FROM student WHERE id = $1', [id]);
+    const id = parseInt(req.params.id as string, 10);
+    const student = await studentService.getStudentById(id);
 
-    if (result.length === 0) {
-      return res.status(404).json({ message: 'The student you looked for is not found' });
+    if (!student) {
+      return res.status(404).json({ message: 'student not found' });
     }
 
-    res.status(200).json(result);
+    res.status(200).json(student);
   } catch (error) {
-    res.status(500).json({ message: 'Error in fetching student', error });
+    res.status(500).json({ message: 'internal server error', error });
   }
 };
 
-// Creer un etudiant
 export const postNewStudent = async (req: Request, res: Response) => {
-  const { firstName, lastName } = req.body;
-
-  if (!firstName || !lastName) {
-    return res.status(400).json({
-      message: "Error: missing 'firstName' or 'lastName' in your request body"
-    });
-  }
-
   try {
-    const result = await pool.query(
-      'INSERT INTO student ("firstName", "lastName") VALUES ($1, $2)',
-      [firstName, lastName]
-    );
-
+    const newStudent = await studentService.addStudent(req.body);
     res.status(201).json({
-      message: 'Student created ',
-      student: result
+      message: 'student created !!',
+      student: newStudent
     });
   } catch (error) {
-    res.status(500).json({ message: 'Error during creating student', error });
+    res.status(500).json({ message: 'internal server error', error });
   }
 };
 
-// Supprimer un etudiant
 export const deleteStudent = async (req: Request, res: Response) => {
-  const id = parseInt(req.params.id, 10);
-
   try {
-    const result = await pool.query('DELETE FROM student WHERE id = $1 RETURNING *', [id]);
+    const id = parseInt(req.params.id as string, 10);
+    const success = await studentService.removeStudent(id);
 
-    if (result.rowCount === 0) {
-      return res.status(404).json({ message: 'Student not found' });
+    if (!success) {
+      return res.status(404).json({ message: 'student not found' });
     }
 
     res.status(204).send();
   } catch (error) {
-    res.status(500).json({ message: 'Error deleting student', error });
+    res.status(500).json({ message: 'iinternal server error', error });
   }
 };
 
-// Mise a jour total d 'un etudianr
 export const putStudent = async (req: Request, res: Response) => {
-  const id = parseInt(req.params.id, 10);
-  const { firstName, lastName } = req.body;
-
-  if (!firstName || !lastName) {
-    return res.status(400).json({
-      message: "Error: missing 'firstName' or 'lastName' in ypur request body"
-    });
-  }
-
   try {
-    const result = await pool.query(
-      'UPDATE student SET "firstName" = $1, "lastName" = $2 WHERE id = $3 ',
-      [firstName, lastName, id]
-    );
+    const id = parseInt(req.params.id as string , 10);
+    const updatedStudent = await studentService.editStudentFully(id, req.body);
 
-    if (result.rows.length === 0) {
-      return res.status(404).json({ message: 'Student not found' });
+    if (!updatedStudent) {
+      return res.status(404).json({ message: 'student not found' });
     }
 
     res.status(200).json({
-      message: 'Student updated !',
-      student: result.rows[0]
+      message: 'Student updated totally !',
+      student: updatedStudent
     });
   } catch (error) {
-    res.status(500).json({ message: 'Error during updating student', error });
+    res.status(500).json({ message: 'intenal server error', error });
   }
 };
 
-// Mettre a jour partiellement un etudiant
 export const patchStudent = async (req: Request, res: Response) => {
-  const id = parseInt(req.params.id, 10);
-  const { firstName, lastName } = req.body;
-
   try {
-    
-    const existingStudent = await pool.query('SELECT * FROM student WHERE id = $1', [id]);
+    const id = parseInt(req.params.id as string , 10);
+    const updatedStudent = await studentService.editStudentPartially(id, req.body);
 
-    if (existingStudent.rows.length === 0) {
+    if (!updatedStudent) {
       return res.status(404).json({ message: 'Student not found' });
     }
 
-    const updatedFirstName = firstName !== undefined ? firstName : existingStudent.rows[0].firstName;
-    const updatedLastName = lastName !== undefined ? lastName : existingStudent.rows[0].lastName;
-
-    const result = await pool.query(
-      'UPDATE student SET "firstName" = $1, "lastName" = $2 WHERE id = $3 RETURNING *',
-      [updatedFirstName, updatedLastName, id]
-    );
-
     res.status(200).json({
-      message: 'Student updated !!',
-      student: result.rows[0]
+      message: 'Student partially updated',
+      student: updatedStudent
     });
   } catch (error) {
-    res.status(500).json({ message: 'Error in updating student', error });
+    res.status(500).json({ message: 'Internal Server Error', error });
   }
 };
