@@ -1,6 +1,6 @@
 //ici se trouve les methodes et calculs pour renvoyer ensuite les reponses vers notre controlleur
 import { Request, Response } from 'express';
-import { pool } from './db';
+import { pool } from '../repository/studentDB';
 
 // Recuperer tous les etudiants
 export const getListOfStudents = async (req: Request, res: Response) => {

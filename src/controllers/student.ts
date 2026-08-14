@@ -1,22 +1,28 @@
 // ici se trouve notre traiteur de requete de CRUD
 
-import { Router } from 'express';
-import {
-  getListOfStudents,
-  getStudent,
-  postNewStudent,
-  putStudent,
-  patchStudent,
-  deleteStudent
-} from './student.controller'; 
+import * as studentRepository from '../repository/student.repository.ts';
+import { Student, CreateStudent, UpdateStudent } from '../model/students.model.ts';
 
-const router = Router();
+export const getAllStudents = async (): Promise<Student[]> => {
+  return await studentRepository.findAllStudents();
+};
 
-router.get('/', getListOfStudents);
-router.get('/:id', getStudent);
-router.post('/', postNewStudent);
-router.put('/:id', putStudent);
-router.patch('/:id', patchStudent);
-router.delete('/:id', deleteStudent);
+export const getStudentById = async (id: number): Promise<Student | null> => {
+  return await studentRepository.findStudentById(id);
+};
 
-export default router;
+export const addStudent = async (studentData: CreateStudent): Promise<Student> => {
+  return await studentRepository.createStudent(studentData);
+};
+
+export const removeStudent = async (id: number): Promise<boolean> => {
+  return await studentRepository.deleteStudentById(id);
+};
+
+export const editStudentFully = async (id: number, studentData: CreateStudent): Promise<Student | null> => {
+  return await studentRepository.updateStudentFull(id, studentData);
+};
+
+export const editStudentPartially = async (id: number, studentData: UpdateStudent): Promise<Student | null> => {
+  return await studentRepository.updateStudentPartial(id, studentData);
+};
