@@ -1,12 +1,15 @@
 // ici se trouve notre recuperation de donnees dans notre base de donnees
 
-const { Pool } = require('pg');
-const pool = new Pool({
-  user: 'hei',
-  host: 'localhost',
-  database: 'react',
-  password: 'Animal',
-  port: 5432,
-});
+declare const process: {
+  env: Record<string, string | undefined>;
+};
 
-module.exports = pool;
+import { Pool } from 'pg';
+
+export const pool = new Pool({
+  user: process.env.DB_USER || 'hei',
+  host: process.env.DB_HOST || 'localhost',
+  database: process.env.DB_NAME || 'react',
+  password: process.env.DB_PASSWORD || 'Animal',
+  port: Number(process.env.DB_PORT) || 5432,
+});
