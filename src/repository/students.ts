@@ -1,7 +1,7 @@
 // ici se trouve notre recuperation de donnees dans notre base de donnees
 
 declare const process: {
-  env: Record<string, string | undefined>;
+  env: Record<string, string | undefined>; 
 };
 
 import { Pool } from 'pg';

@@ -1,21 +1,22 @@
 // ici se trouve notre traiteur de requete de CRUD
 
-import { Request , Response } from "express";
-const PORT = process.env.PORT || 3000;
-const app = express();
-import cors from 'cors';
-app.use(cors());
-const message = statuses;
-const router = express.Router();
+import { Router } from 'express';
+import {
+  getListOfStudents,
+  getStudent,
+  postNewStudent,
+  putStudent,
+  patchStudent,
+  deleteStudent
+} from './student.controller'; 
 
-router.get("/" , getListOfStudents);
+const router = Router();
 
-router.get("/students/:id" , getStudent);
+router.get('/', getListOfStudents);
+router.get('/:id', getStudent);
+router.post('/', postNewStudent);
+router.put('/:id', putStudent);
+router.patch('/:id', patchStudent);
+router.delete('/:id', deleteStudent);
 
-router.post("/students" , postNewStudent);
-
-router.put("/:id" , putStudent);
-
-router.patch("/:id" , patchStudent);
-
-router.delete("/:id" , deleteStudent );
+export default router;
