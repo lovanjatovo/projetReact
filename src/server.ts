@@ -1,6 +1,6 @@
 import express, { Application, Request, Response } from 'express';
 import cors from 'cors';
-import studentRouter from './student.router'; 
+import studentRouter from './controllers/student.router.ts'; 
 
 const app: Application = express();
 const PORT = process.env.PORT || 3000;
