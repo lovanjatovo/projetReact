@@ -1,0 +1,17 @@
+// ici va se placer les entites dont la structure va etre suivie par notre base de donnees
+
+export interface Student {
+  id: number;
+  firstName: string;
+  lastName: string;
+}
+
+export interface createStudent {
+  firstName: string;
+  lastName: string;
+}
+
+export interface updateStudent {
+  firstName?: string;
+  lastName?: string;
+}
