@@ -2,6 +2,10 @@
 
 import { Pool } from 'pg';
 
+declare const process: {
+  env: Record<string, string | undefined>; 
+};
+
 export const pool = new Pool({
   user: process.env.DB_USER || 'hei',
   host: process.env.DB_HOST || 'localhost',

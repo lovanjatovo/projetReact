@@ -6,12 +6,12 @@ export interface Student {
   lastName: string;
 }
 
-export interface createStudent {
+export interface CreateStudent {
   firstName: string;
   lastName: string;
 }
 
-export interface updateStudent {
+export interface UpdateStudent {
   firstName?: string;
   lastName?: string;
 }
