@@ -53,3 +53,20 @@ export const postNewStudent = async (req: Request, res: Response) => {
     res.status(500).json({ message: 'Error during creating student', error });
   }
 };
+
+// Supprimer un etudiant
+export const deleteStudent = async (req: Request, res: Response) => {
+  const id = parseInt(req.params.id, 10);
+
+  try {
+    const result = await pool.query('DELETE FROM student WHERE id = $1 RETURNING *', [id]);
+
+    if (result.rowCount === 0) {
+      return res.status(404).json({ message: 'Student not found' });
+    }
+
+    res.status(204).send();
+  } catch (error) {
+    res.status(500).json({ message: 'Error deleting student', error });
+  }
+};
