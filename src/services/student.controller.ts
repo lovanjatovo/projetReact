@@ -100,3 +100,33 @@ export const putStudent = async (req: Request, res: Response) => {
     res.status(500).json({ message: 'Error during updating student', error });
   }
 };
+
+// Mettre a jour partiellement un etudiant
+export const patchStudent = async (req: Request, res: Response) => {
+  const id = parseInt(req.params.id, 10);
+  const { firstName, lastName } = req.body;
+
+  try {
+    
+    const existingStudent = await pool.query('SELECT * FROM student WHERE id = $1', [id]);
+
+    if (existingStudent.rows.length === 0) {
+      return res.status(404).json({ message: 'Student not found' });
+    }
+
+    const updatedFirstName = firstName !== undefined ? firstName : existingStudent.rows[0].firstName;
+    const updatedLastName = lastName !== undefined ? lastName : existingStudent.rows[0].lastName;
+
+    const result = await pool.query(
+      'UPDATE student SET "firstName" = $1, "lastName" = $2 WHERE id = $3 RETURNING *',
+      [updatedFirstName, updatedLastName, id]
+    );
+
+    res.status(200).json({
+      message: 'Student updated !!',
+      student: result.rows[0]
+    });
+  } catch (error) {
+    res.status(500).json({ message: 'Error in updating student', error });
+  }
+};
