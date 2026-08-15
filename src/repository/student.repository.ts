@@ -14,21 +14,21 @@ export const findStudentById = async (id: number): Promise<Student | null> => {
 export const createStudent = async (studentData: CreateStudent): Promise<Student> => {
   const { firstName, lastName } = studentData;
   const result = await pool.query(
-    'INSERT INTO student ("firstName", "lastName") VALUES ($1, $2) ',
+    'INSERT INTO student ("firstName", "lastName") VALUES ($1, $2) RETURNING',
     [firstName, lastName]
   );
   return result.rows[0];
 };
 
 export const deleteStudentById = async (id: number): Promise<boolean> => {
-  const result = await pool.query('DELETE FROM student WHERE id = $1 ', [id]);
+  const result = await pool.query('DELETE FROM student WHERE id = $1 RETURNING', [id]);
   return (result.rowCount ?? 0) > 0;
 };
 
 export const updateStudentFull = async (id: number, studentData: CreateStudent): Promise<Student | null> => {
   const { firstName, lastName } = studentData;
   const result = await pool.query(
-    'UPDATE student SET "firstName" = $1, "lastName" = $2 WHERE id = $3 ',
+    'UPDATE student SET "firstName" = $1, "lastName" = $2 WHERE id = $3 RETURNING',
     [firstName, lastName, id]
   );
   return result.rows[0] || null;
@@ -42,7 +42,7 @@ export const updateStudentPartial = async (id: number, studentData: UpdateStuden
   const newLastName = studentData.lastName !== undefined ? studentData.lastName : exist.lastName;
 
   const result = await pool.query(
-    'UPDATE student SET "firstName" = $1, "lastName" = $2 WHERE id = $3 ',
+    'UPDATE student SET "firstName" = $1, "lastName" = $2 WHERE id = $3 RETURNING',
     [newFirstName, newLastName, id]
   );
   return result.rows[0] || null;
