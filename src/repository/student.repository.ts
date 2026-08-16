@@ -1,5 +1,7 @@
 import { pool } from './studentDB.ts';
-import { Student, CreateStudent, UpdateStudent } from '../model/students.model.ts';
+import { Student } from '../model/students.model.ts';
+import { CreateStudent } from '../model/students.model.ts';
+import { UpdateStudent } from '../model/students.model.ts';
 
 export const findAllStudents = async (): Promise<Student[]> => {
   const result = await pool.query('SELECT * FROM student ORDER BY id ASC');

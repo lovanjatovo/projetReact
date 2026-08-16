@@ -1,7 +1,9 @@
 // ici se trouve notre traiteur de requete de CRUD
 
 import * as studentRepository from '../repository/student.repository.ts';
-import { Student, CreateStudent, UpdateStudent } from '../model/students.model.ts';
+import { Student } from '../model/students.model.ts';
+import { CreateStudent } from '../model/students.model.ts';
+import { UpdateStudent } from '../model/students.model.ts';
 
 export const getAllStudents = async (): Promise<Student[]> => {
   return await studentRepository.findAllStudents();
