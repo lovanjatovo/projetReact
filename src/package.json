@@ -5,6 +5,7 @@
   "main": "postgres.js",
   "dependencies": {
     "accepts": "^2.0.0",
+    "axios": "^1.19.0",
     "body-parser": "^2.3.0",
     "bytes": "^3.1.2",
     "call-bind-apply-helpers": "^1.0.2",
@@ -39,6 +40,7 @@
     "inherits": "^2.0.4",
     "ipaddr.js": "^1.9.1",
     "is-promise": "^4.0.0",
+    "jwt-decode": "^4.0.0",
     "math-intrinsics": "^1.1.0",
     "media-typer": "^1.1.1",
     "merge-descriptors": "^2.0.0",
@@ -67,6 +69,7 @@
     "qs": "^6.15.3",
     "range-parser": "^1.3.0",
     "raw-body": "^3.0.2",
+    "react-router-dom": "^7.18.2",
     "router": "^2.2.0",
     "safer-buffer": "^2.1.2",
     "send": "^1.2.1",
