@@ -6,12 +6,12 @@ export interface Student {
   lastName: string;
 }
 
-export interface CreateStudent {
+export interface CreateStudentDTO {
   firstName: string;
   lastName: string;
 }
 
-export interface UpdateStudent {
+export interface UpdateStudentDTO {
   firstName?: string;
   lastName?: string;
 }
