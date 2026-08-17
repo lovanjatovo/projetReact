@@ -1,13 +1,7 @@
-// ici se trouve notre recuperation de donnees dans notre base de donnees
-
 import { Pool } from 'pg';
 
-declare const process: {
-  env: Record<string, string | undefined>; 
-};
-
 export const pool = new Pool({
-  user: process.env.DB_USER || 'hei',
+  user: process.env.DB_USER || 'postgres',
   host: process.env.DB_HOST || 'localhost',
   database: process.env.DB_NAME || 'react',
   password: process.env.DB_PASSWORD || 'Animal',

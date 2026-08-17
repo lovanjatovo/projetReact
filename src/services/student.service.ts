@@ -1,91 +1,34 @@
-//ici se trouve les methodes et calculs pour renvoyer ensuite les reponses vers notre controlleur
+import * as studentRepository from '../repository/student.repository';
+import { StudentDTO, CreateStudentDTO, UpdateStudentDTO } from '../model/students.model';
 
-import { Request, Response } from 'express';
-import * as studentService from '../controllers/student.ts';
-
-export const getListOfStudents = async (req: Request, res: Response) => {
-  try {
-    const students = await studentService.getAllStudents();
-    res.status(200).json(students);
-  } catch (error) {
-    res.status(500).json({ message: 'internal server error', error });
-  }
+export const getAllStudents = async (): Promise<StudentDTO[]> => {
+  return await studentRepository.findAllStudents();
 };
 
-export const getStudent = async (req: Request, res: Response) => {
-  try {
-    const id = parseInt(req.params.id as string, 10);
-    const student = await studentService.getStudentById(id);
-
-    if (!student) {
-      return res.status(404).json({ message: 'student not found' });
-    }
-
-    res.status(200).json(student);
-  } catch (error) {
-    res.status(500).json({ message: 'internal server error', error });
-  }
+export const getStudentById = async (id: number): Promise<StudentDTO | null> => {
+  return await studentRepository.findStudentById(id);
 };
 
-export const postNewStudent = async (req: Request, res: Response) => {
-  try {
-    const newStudent = await studentService.addStudent(req.body);
-    res.status(201).json({
-      message: 'student created !!',
-      student: newStudent
-    });
-  } catch (error) {
-    res.status(500).json({ message: 'internal server error', error });
-  }
+export const addStudent = async (studentData: CreateStudentDTO): Promise<StudentDTO> => {
+  return await studentRepository.createStudent(studentData);
 };
 
-export const deleteStudent = async (req: Request, res: Response) => {
-  try {
-    const id = parseInt(req.params.id as string, 10);
-    const success = await studentService.removeStudent(id);
-
-    if (!success) {
-      return res.status(404).json({ message: 'student not found' });
-    }
-
-    res.status(204).send();
-  } catch (error) {
-    res.status(500).json({ message: 'iinternal server error', error });
-  }
+export const removeStudent = async (id: number): Promise<boolean> => {
+  return await studentRepository.deleteStudentById(id);
 };
 
-export const putStudent = async (req: Request, res: Response) => {
-  try {
-    const id = parseInt(req.params.id as string , 10);
-    const updatedStudent = await studentService.editStudentFully(id, req.body);
-
-    if (!updatedStudent) {
-      return res.status(404).json({ message: 'student not found' });
-    }
-
-    res.status(200).json({
-      message: 'Student updated totally !',
-      student: updatedStudent
-    });
-  } catch (error) {
-    res.status(500).json({ message: 'intenal server error', error });
-  }
+export const updateStudentFull = async (id: number, studentData: CreateStudentDTO): Promise<StudentDTO | null> => {
+  return await studentRepository.updateStudentFull(id, studentData);
 };
 
-export const patchStudent = async (req: Request, res: Response) => {
-  try {
-    const id = parseInt(req.params.id as string , 10);
-    const updatedStudent = await studentService.editStudentPartially(id, req.body);
+export const editStudentFully = async (id: number, studentData: CreateStudentDTO): Promise<StudentDTO | null> => {
+  return await updateStudentFull(id, studentData);
+};
 
-    if (!updatedStudent) {
-      return res.status(404).json({ message: 'Student not found' });
-    }
+export const updateStudentPartial = async (id: number, studentData: UpdateStudentDTO): Promise<StudentDTO | null> => {
+  return await studentRepository.updateStudentPartial(id, studentData);
+};
 
-    res.status(200).json({
-      message: 'Student partially updated',
-      student: updatedStudent
-    });
-  } catch (error) {
-    res.status(500).json({ message: 'Internal Server Error', error });
-  }
+export const editStudentPartially = async (id: number, studentData: UpdateStudentDTO): Promise<StudentDTO | null> => {
+  return await updateStudentPartial(id, studentData);
 };
