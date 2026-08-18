@@ -3,7 +3,7 @@ import {
   getListOfStudents,
   getStudent,
   postNewStudent
-} from './student.controller.ts';
+} from './studentController.ts';
 
 const router = Router();
 

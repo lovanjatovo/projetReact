@@ -1,6 +1,6 @@
 import express, { Application, Request, Response } from 'express';
 import dotenv from 'dotenv';
-import studentRouter from './controllers/student.router';
+import studentRouter from './controllers/studentRouter';
 
 
 dotenv.config();
@@ -13,7 +13,7 @@ app.use(express.json());
 
 
 app.get('/', (req: Request, res: Response) => {
-  res.send('API Node.js / Express avec TypeScript fonctionne correctement !');
+  res.send('runnig the api');
 });
 
 

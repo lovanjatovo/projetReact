@@ -11,7 +11,9 @@ export interface CreateStudentDTO {
   lastName: string;
 }
 
+/*
 export interface UpdateStudentDTO {
   firstName?: string;
   lastName?: string;
 }
+  */
