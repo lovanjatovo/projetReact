@@ -1,4 +1,4 @@
-import { pool } from './studentDB.ts';
+import { pool } from '../configurations/studentDB.ts';
 import { StudentDTO, CreateStudentDTO} from '../model/studentsModel.ts';
 
 export const findAllStudents = async (): Promise<StudentDTO[]> => {
