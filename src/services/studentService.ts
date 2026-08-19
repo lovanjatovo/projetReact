@@ -3,15 +3,15 @@ import {
   findAllStudents as getStudentsRepository,
   findStudentById as getStudentByIdRepository,
   updateStudent as updateStudentRepository,
-} from "../repository/studentRepository.ts";
+} from "../repository/studentRepository";
 
-import { deleteStudentById } from "../repository/studentRepository.ts";
+import { deleteStudentById } from "../repository/studentRepository";
 
 import {
   StudentDTO,
   CreateStudentDTO,
   UpdateStudentDTO
-} from "../model/studentsModel.ts";
+} from "../model/studentsModel";
 
 export const getStudents = async(): Promise<StudentDTO[]> => {
   return await getStudentsRepository();

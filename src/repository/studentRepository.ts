@@ -1,5 +1,5 @@
-import pool from '../configurations/studentDB.ts';
-import { StudentDTO, CreateStudentDTO, UpdateStudentDTO} from '../model/studentsModel.ts';
+import pool from '../configurations/studentDB';
+import { StudentDTO, CreateStudentDTO, UpdateStudentDTO} from '../model/studentsModel';
 
 export const findAllStudents = async (): Promise<StudentDTO[]> => {
   const result = await pool.query('SELECT * FROM students ORDER BY id');

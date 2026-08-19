@@ -1,6 +1,6 @@
 import express, { Application, Request, Response } from 'express';
 import dotenv from 'dotenv';
-import studentRouter from './controllers/studentRouter.ts';
+import studentRouter from './controllers/studentRouter';
 
 
 dotenv.config();

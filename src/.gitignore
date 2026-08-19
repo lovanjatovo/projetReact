@@ -20,7 +20,7 @@ pnpm-debug.log*
 lerna-debug.log*
 
 # Variables d'environnement locales
-src/configurations/.env
+/.env
 .env.local
 .env.development.local
 .env.test.local
