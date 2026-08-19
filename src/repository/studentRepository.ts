@@ -51,3 +51,11 @@ export const deleteStudentById = async (
   );
   return result.rows[0] || null;
 }
+
+export const findStudentByEmail = async (email: string) => {
+  const result = await pool.query(
+    'SELECT * FROM students WHERE email = $1',
+    [email]
+  );
+  return result.rows[0] || null;
+};

@@ -1,11 +1,14 @@
 // src/security/authBearer.ts
 
 import { Request, Response, NextFunction } from 'express';
-import jwt from 'jsonwebtoken';
+
+const jwt = require('jsonwebtoken') as {
+  verify: (token: string, secret: string) => string | { [key: string]: any };
+};
 
 // Étend le type Request d'Express pour y attacher les données de l'utilisateur authentifié
 export interface AuthenticatedRequest extends Request {
-  user?: string | jwt.JwtPayload;
+  user?: string | { [key: string]: any };
 }
 
 /**

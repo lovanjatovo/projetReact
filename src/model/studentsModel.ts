@@ -16,3 +16,13 @@ export interface UpdateStudentDTO {
   firstName?: string;
   lastName?: string;
 }
+
+export interface LoginDTO {
+  email: string;
+  password: string;
+}
+
+export interface LoginResponseDTO {
+  token: string;
+  student: StudentDTO;
+}
