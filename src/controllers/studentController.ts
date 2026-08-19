@@ -3,7 +3,7 @@ import * as studentService from '../services/studentService.ts';
 
 export const getListOfStudents = async (req: Request, res: Response) => {
   try {
-    const students = await studentService.getAllStudents();
+    const students = await studentService.getStudents();
     res.status(200).json(students);
   } catch (error) {
     res.status(500).json({ message: 'Internal server error', error });
@@ -33,7 +33,7 @@ export const getStudent = async (req: Request, res: Response) => {
 
 export const postNewStudent = async (req: Request, res: Response) => {
   try {
-    const newStudent = await studentService.addStudent(req.body);
+    const newStudent = await studentService.createStudent(req.body);
     res.status(201).json(newStudent);
   } catch (error) {
     res.status(500).json({ message: 'Internal server error', error });
