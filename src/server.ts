@@ -1,11 +1,11 @@
-import express, { Application, Request, Response } from 'express';
+import express, { Express, Request, Response } from 'express';
 import dotenv from 'dotenv';
-import studentRouter from './controllers/studentRouter';
+import router from './controllers/studentRouter';
 
 
 dotenv.config();
 
-const app: Application = express();
+const app: Express = express();
 const PORT = process.env.PORT || 3000;
 
 
@@ -13,11 +13,8 @@ app.use(express.json());
 
 
 app.get('/', (req: Request, res: Response) => {
-  res.send('runnig the api');
+  res.status(200).json({status: 'runnig the api'});
 });
-
-
-app.use('/students', studentRouter);
 
 // Démarrage du serveur
 app.listen(PORT, () => {
