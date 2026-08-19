@@ -1,5 +1,5 @@
-import * as studentRepository from '../repository/studentRepository';
-import { StudentDTO, CreateStudentDTO} from '../model/studentsModel';
+import * as studentRepository from '../repository/studentRepository.ts';
+import { StudentDTO, CreateStudentDTO} from '../model/studentsModel.ts';
 
 export const getAllStudents = async (): Promise<StudentDTO[]> => {
   return await studentRepository.findAllStudents();
