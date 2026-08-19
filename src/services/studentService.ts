@@ -94,3 +94,4 @@ export const loginStudent = async (credentials: LoginDTO): Promise<LoginResponse
     student: studentWithoutPassword,
   };
 };
+
