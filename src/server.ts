@@ -9,6 +9,10 @@ const app: Express = express();
 const PORT = process.env.PORT || 3000;
 
 
+import authRouter from './controllers/authRouter';
+
+app.use('/auth', authRouter);
+
 app.use(express.json());
 
 
