@@ -1,19 +1,42 @@
-import * as studentRepository from '../repository/studentRepository.ts';
-import { StudentDTO, CreateStudentDTO} from '../model/studentsModel.ts';
-import { deleteStudentById } from '../repository/studentRepository.ts';
+import {
+  createStudent as createStudentRepository,
+  findAllStudents as getStudentsRepository,
+  findStudentById as getStudentByIdRepository,
+  updateStudent as updateStudentRepository,
+} from "../repository/studentRepository.ts";
 
-export const getAllStudents = async (): Promise<StudentDTO[]> => {
-  return await studentRepository.findAllStudents();
-};
+import { deleteStudentById } from "../repository/studentRepository.ts";
 
-export const getStudentById = async (id: number): Promise<StudentDTO | null> => {
-  return await studentRepository.findStudentById(id);
-};
+import {
+  StudentDTO,
+  CreateStudentDTO,
+  UpdateStudentDTO
+} from "../model/studentsModel.ts";
 
-export const addStudent = async (studentData: CreateStudentDTO): Promise<StudentDTO> => {
-  return await studentRepository.createStudent(studentData);
-};
-
-export const deleteStudent = async (id: number): Promise<StudentDTO | null> =>{
-  return await deleteStudentById(id);
+export const getStudents = async(): Promise<StudentDTO[]> => {
+  return await getStudentsRepository();
 }
+
+export const getStudentById = async (
+  id: number
+): Promise<StudentDTO | null> => {
+  return await getStudentByIdRepository(id)
+};
+
+export const createStudent = async (
+  studentData: CreateStudentDTO
+): Promise<StudentDTO> =>{
+  return await createStudentRepository(studentData)
+};
+
+export const updateStudent = async(
+  studentData: UpdateStudentDTO
+): Promise<UpdateStudentDTO | null> => {
+  return await updateStudentRepository(studentData)
+};
+
+export const deleteStudent = async (
+  id: number
+): Promise<StudentDTO | null> => {
+  return await deleteStudentById(id);
+};

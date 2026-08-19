@@ -2,7 +2,7 @@ import pool from '../configurations/studentDB.ts';
 import { StudentDTO, CreateStudentDTO, UpdateStudentDTO} from '../model/studentsModel.ts';
 
 export const findAllStudents = async (): Promise<StudentDTO[]> => {
-  const result = await pool.query('SELECT * FROM students ORDER BY id ASC');
+  const result = await pool.query('SELECT * FROM students ORDER BY id');
   return result.rows;
 };
 
@@ -12,7 +12,6 @@ export const findStudentById = async (id: number): Promise<StudentDTO | null> =>
 };
 
 export const createStudent = async (studentData: CreateStudentDTO): Promise<StudentDTO> => {
-  const { firstName, lastName } = studentData;
   const result = await pool.query(
     'INSERT INTO students (first_name, last_name) VALUES ($1, $2) RETURNING *',
     [
