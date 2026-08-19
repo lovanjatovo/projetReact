@@ -12,7 +12,3 @@ export const getStudentById = async (id: number): Promise<StudentDTO | null> => 
 export const addStudent = async (studentData: CreateStudentDTO): Promise<StudentDTO> => {
   return await studentRepository.createStudent(studentData);
 };
-
-export const removeStudent = async (id: number): Promise<boolean> => {
-  return await studentRepository.deleteStudentById(id);
-};
